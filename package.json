@@ -1,0 +1,25 @@
+{
+  "name": "website-webp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "live-server --port=5501 --no-browser --open=./index.html",
+    "watch": "live-server --port=5501 --no-browser --watch=./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karlwebit/website-webp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Karlwebit/website-webp/issues"
+  },
+  "homepage": "https://github.com/Karlwebit/website-webp#readme",
+  "description": "",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
