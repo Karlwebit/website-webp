@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/Karlwebit/website-webp/issues"
   },
-  "homepage": "https://github.com/Karlwebit/website-webp#readme",
+  "homepage": "https://github.com/Karlwebit/website-webp/index.html",
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.29.0",
