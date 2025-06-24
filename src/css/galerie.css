@@ -1,0 +1,43 @@
+/* galerie.css - Styles für die Bildergalerie */
+
+body {
+  background-color: #e6f7ff;
+}
+
+main h1 {
+  color: #007acc;
+}
+
+/* Galerie-Grid Layout */
+.galerie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  padding: 32px 0;
+}
+
+.galerie-grid figure {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin: 0;
+  padding: 12px 12px 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.galerie-grid img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.galerie-grid figcaption {
+  color: #333;
+  font-size: 1.05em;
+  text-align: center;
+  margin-top: 4px;
+}

@@ -1,0 +1,109 @@
+/* rezeptliste.css - Styles für die Rezeptliste */
+
+body {
+  background-color: #fffbe6;
+}
+
+main {
+  background: #e6f9e6;
+}
+
+main h1 {
+  color: #388e3c;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Rezepte-Layout */
+.rezepte-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+.rezept-card {
+  background: #c4d6c4;
+  border: 2px solid #2f6c31;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  padding: 0;
+  width: 320px;
+  height: 500px;
+  flex: 0 0 320px;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.rezept-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
+}
+
+.rezept-card .rezept-card-content h2 {
+  margin: 0 auto;
+  color: #388e3c;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 1.3em;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.rezept-card .rezept-card-content ol {
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+
+.rezept-card .rezept-card-content li {
+  margin-bottom: 8px;
+  font-size: 1.05em;
+}
+
+.rezept-card .rezept-card-img {
+  width: 100%;
+  height: 30%;
+  min-height: 0;
+  flex: 0 0 30%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.rezept-card .rezept-card-img img.rezept-bild {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  margin: 0;
+  box-shadow: none;
+  display: block;
+}
+
+.rezept-card .rezept-card-content {
+  width: 90%;
+  margin: 10px auto 0;
+  height: 70%;
+  min-height: 0;
+  flex: 1 1 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+  overflow: auto;
+  padding: 0 0 18px 0;
+}
