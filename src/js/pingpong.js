@@ -136,7 +136,10 @@ function resetGame() {
 function movePlayer(e) {
   const rect = canvas.getBoundingClientRect();
   let mouseY = e.clientY - rect.top;
-  player.y = Math.max(0, Math.min(canvas.height - player.h, mouseY - player.h / 2));
+  player.y = Math.max(
+    0,
+    Math.min(canvas.height - player.h, mouseY - player.h / 2),
+  );
 }
 
 // Tastatursteuerung
