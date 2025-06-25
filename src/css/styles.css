@@ -175,6 +175,13 @@ footer ul li a:hover {
   font-weight: bold;
 }
 
+@media (min-width: 600px) and (max-width: 899px) {
+  body .main-aside-wrapper aside .ad-block button {
+    padding: 2px;
+    font-size: 1em;
+  }
+}
+
 /* Ping-Pong Game Styles 
 -----------------------------------------------------------
 -----------------------------------------------------------

@@ -1,9 +1,13 @@
 /* weltkarte.css - Styles für die Weltkarte */
+/* Leaflet CSS importiert von CDN, damit die Karte korrekt angezeigt wird */
 
 body {
-  background-color: #cad2ee;
+  background-color: #d8cab5;
 }
 
 main h1 {
-  color: #4b2bc8;
+  color: #c85d2b;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  display: flex;
+  justify-content: center;
 }
