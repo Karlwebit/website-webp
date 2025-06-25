@@ -10,7 +10,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // Beispiel-Marker
-L.marker([51.505, -0.09])
+L.marker([51.0413, 13.7681])
   .addTo(map)
-  .bindPopup("Hallo von Leaflet!")
+  .bindPopup("<strong>Dresden<strong>")
   .openPopup();
