@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
     "start": "npm run build && npm run dev",
+=======
+    "start": "concurrently \"http-server -p 5501\" \"cmd /c start http://localhost:5501\"",
+>>>>>>> b72afb9ecb33356ed7020a201fa7a7bb30ab59f2
     "build": "vite build",
     "lint": "eslint src/js --config eslint.config.mjs",
     "format": "prettier --write \"src/**/*.{js,css,html}\""
@@ -20,13 +24,15 @@
   "bugs": {
     "url": "https://github.com/Karlwebit/website-webp/issues"
   },
-  "homepage": "https://github.com/Karlwebit/website-webp#readme",
+  "homepage": "https://github.com/Karlwebit/website-webp/index.html",
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.29.0",
+    "concurrently": "^9.2.0",
     "esbuild": "^0.25.5",
     "eslint": "^9.29.0",
     "globals": "^16.2.0",
+    "open": "^10.1.2",
     "prettier": "^3.6.0",
     "vite": "^7.0.0"
   },

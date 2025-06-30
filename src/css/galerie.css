@@ -1,47 +1,288 @@
-/* galerie.css - Styles für die Bildergalerie */
+/* galerie.css */
 
-body {
-  background-color: #e6f7ff;
+@media (min-width: 900px) {
+  body {
+    background-color: #a6ccdd;
+  }
+  main h1 {
+    color: #007acc;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+  .galerie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    padding: 32px 0;
+  }
+  .galerie-grid figure {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    margin: 0;
+    padding: 12px 12px 18px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .galerie-grid figure:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+  .galerie-grid img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .galerie-grid figcaption {
+    color: #333;
+    font-size: 1.05em;
+    text-align: center;
+    margin-top: 4px;
+  }
+  .ad-block-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .ad-block {
+    width: 90%;
+    font-size: 1.2em;
+    padding: 10px 0;
+    margin-bottom: 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .main-aside-wrapper {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  aside {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #bcb8be;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.04);
+    position: static;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+    overflow-y: auto;
+  }
 }
 
+<<<<<<< HEAD
 main h1 {
   color: #007acc;
   font-family: "Comic Sans MS", cursive, sans-serif;
   margin-top: 0;
   margin-bottom: 24px;
   text-align: center;
+=======
+@media (min-width: 600px) and (max-width: 899px) {
+  body {
+    background-color: #a6ccdd;
+    margin: 0;
+    padding: 0;
+  }
+  main h1 {
+    color: #007acc;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+    display: block;
+    margin: 18px 0 8px 0;
+    font-size: 2rem;
+  }
+  .main-aside-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  main {
+    padding: 1vw;
+    width: 98vw;
+  }
+  .galerie-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    padding: 5px 0;
+  }
+  .galerie-grid figure {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    margin: 0;
+    padding: 10px 10px 16px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+  }
+  .galerie-grid img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .galerie-grid figcaption {
+    color: #333;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 4px;
+  }
+  aside {
+    display: flex;
+    background: transparent;
+    flex-direction: row;
+    flex: 0 0 25%;
+    background-color: #bcb8be;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .ad-block-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    width: 100%;
+    margin-bottom: 4px;
+    display: grid;
+  }
+  .ad-block {
+    width: 98%;
+    min-width: 0;
+    max-width: 120px;
+    font-size: 0.7em;
+    padding: 4px 0;
+    margin: 0 auto;
+    border-width: 1px;
+    border-radius: 6px;
+    box-shadow: none;
+    background: #ffe082;
+    position: static;
+    left: unset;
+    bottom: unset;
+    transform: none;
+    z-index: unset;
+  }
+
+  header,
+  footer {
+    padding: 8px;
+  }
+  header ul,
+  footer ul {
+    flex-direction: row;
+    gap: 4px;
+    padding: 5px;
+  }
+>>>>>>> b72afb9ecb33356ed7020a201fa7a7bb30ab59f2
 }
 
-/* Galerie-Grid Layout */
-.galerie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 28px;
-  padding: 32px 0;
-}
-
-.galerie-grid figure {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  margin: 0;
-  padding: 12px 12px 18px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.galerie-grid img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.galerie-grid figcaption {
-  color: #333;
-  font-size: 1.05em;
-  text-align: center;
-  margin-top: 4px;
+@media (max-width: 599px) {
+  body {
+    background-color: #a6ccdd;
+    margin: 0;
+    padding: 0;
+  }
+  main h1 {
+    color: #007acc;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+  .main-aside-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  main {
+    padding: 4px;
+    max-width: 100vw;
+  }
+  .galerie-grid figure {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    margin: 15px;
+    padding: 10px 10px 16px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+  }
+  .galerie-grid img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .galerie-grid figcaption {
+    color: #333;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 4px;
+  }
+  aside {
+    background-color: #bcb8be;
+    flex: 0 0 25vh;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+  .ad-block-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 6px;
+    width: 100%;
+    margin-bottom: 4px;
+    display: grid;
+  }
+  .ad-block {
+    font-size: 0.75em;
+    padding: 2px 2px 2px 2px;
+    margin: 4px;
+    border-width: 1px;
+    border-radius: 6px;
+    box-shadow: none;
+    background: #ffe082;
+    position: static;
+    left: unset;
+    bottom: unset;
+    transform: none;
+    z-index: unset;
+  }
+  .ad-block button {
+    font-size: 1em;
+    padding: 2px 6px;
+    margin-top: 2px;
+  }
+  header,
+  footer {
+    padding: 8px;
+  }
+  header ul,
+  footer ul {
+    flex-direction: row;
+    gap: 0;
+    padding: 2px;
+    font-size: 0.8em;
+  }
 }
