@@ -22,8 +22,46 @@ let keyState = { ArrowUp: false, ArrowDown: false };
 
 const WIN_SCORE = 7;
 
-// Startbildschirm
+/**
+ * Zeigt eine Fehlermeldung im Hauptbereich an.
+ * @param {string} message - Die anzuzeigende Fehlermeldung.
+ */
+function showError(message) {
+  if (main) {
+    main.innerHTML = `<div class="pingpong-error">${escapeHTML(message)}</div>`;
+  } else {
+    alert(message);
+  }
+}
+
+/**
+ * Wandelt einen String in eine HTML-sichere Zeichenkette um (gegen XSS).
+ * @param {string} str - Der zu escapende String.
+ * @returns {string} Die HTML-sichere Zeichenkette.
+ */
+function escapeHTML(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/**
+ * Rendert den Startbildschirm des Ping-Pong-Spiels.
+ * Setzt die Spielstände zurück und entfernt Event-Listener.
+ * Wird beim Spielstart und nach Spielende aufgerufen.
+ * @returns {void} Es wird kein Wert zurückgegeben.
+ * @example
+ * renderStartScreen();
+ */
 function renderStartScreen() {
+  if (!main) {
+    showError("Fehler: Hauptbereich nicht gefunden.");
+    return;
+  }
+
   main.innerHTML = `
     <div class="pingpong-wrapper">
       <div class="pingpong-card">
@@ -33,12 +71,30 @@ function renderStartScreen() {
         <div class="pingpong-card-content">
           <h2>Bereit?</h2>
           <p>Bewege deinen Schläger mit der Maus und besiege den Computer!</p>
+          <input id="playerNameInput" maxlength="20" placeholder="Dein Name (optional)" />
+          <div id="nameError" style="color:red;"></div>
           <button class="pingpong-btn" id="startBtn">▶ Spiel starten</button>
         </div>
       </div>
     </div>
   `;
-  document.getElementById("startBtn").onclick = startGame;
+  document.getElementById("startBtn").onclick = function () {
+    const nameInput = document.getElementById("playerNameInput");
+    const nameError = document.getElementById("nameError");
+    const name = nameInput.value.trim();
+    if (name.length > 0 && !/^[a-zA-Z0-9äöüÄÖÜß _-]+$/.test(name)) {
+      nameError.textContent =
+        "Name darf nur Buchstaben, Zahlen, Leerzeichen und -_ enthalten.";
+      return;
+    }
+    if (name.length > 20) {
+      nameError.textContent = "Name darf maximal 20 Zeichen lang sein.";
+      return;
+    }
+    // Name ist gültig, speichern (optional)
+    window.pingpongPlayerName = name;
+    startGame();
+  };
 
   playerScore = 0;
   aiScore = 0;
@@ -49,17 +105,32 @@ function renderStartScreen() {
     canvas.removeEventListener("mousemove", mouseMoveHandler);
 }
 
-// Spielbildschirm
+/**
+ * Rendert den Spielbildschirm mit Punktestand und Steuerungselementen.
+ * @returns {void} Es wird kein Wert zurückgegeben.
+ * @example
+ * renderGameScreen();
+ */
 function renderGameScreen() {
+  if (!main) {
+    showError("Fehler: Hauptbereich nicht gefunden.");
+    return;
+  }
+  // Spielername prüfen, falls leer, dann 'Spieler' anzeigen
+  const playerName = escapeHTML(
+    window.pingpongPlayerName && window.pingpongPlayerName.length > 0
+      ? window.pingpongPlayerName
+      : "Spieler",
+  );
   main.innerHTML = `
     <div class="pingpong-wrapper">
       <div class="pingpong-card">
         <div class="pingpong-scoreboard">
-          <span class="score-label">Spieler</span>
+          <span class="score-label">${playerName}</span>
           <span class="score-value" id="playerScore">${playerScore}</span>
           <span class="score-sep">:</span>
           <span class="score-value" id="aiScore">${aiScore}</span>
-          <span class="score-label">Gegner</span>
+          <span class="score-label">Computer</span>
         </div>
         <canvas id="pingpong-canvas" width="500" height="300"></canvas>
         <div class="pingpong-controls">
@@ -74,13 +145,28 @@ function renderGameScreen() {
 }
 
 // Start
+/**
+ * Startet das Spiel, initialisiert Spielfeld und Event-Listener.
+ * Nur im Status "START" möglich. Setzt das Spiel in den Status "PLAYING".
+ * @returns {void} Es wird kein Wert zurückgegeben.
+ * @example
+ * startGame();
+ */
 function startGame() {
   if (state !== GameState.START) return;
 
   state = GameState.PLAYING;
   renderGameScreen();
   canvas = document.getElementById("pingpong-canvas");
+  if (!canvas) {
+    showError("Fehler: Canvas nicht gefunden.");
+    return;
+  }
   ctx = canvas.getContext("2d");
+  if (!ctx) {
+    showError("Fehler: Canvas-Kontext nicht verfügbar.");
+    return;
+  }
 
   mouseMoveHandler = movePlayer;
   canvas.addEventListener("mousemove", mouseMoveHandler);
@@ -92,6 +178,12 @@ function startGame() {
 }
 
 // Spiel beenden
+/**
+ * Beendet das aktuelle Spiel, entfernt Event-Listener und zeigt den Startbildschirm an.
+ * @returns {void} Es wird kein Wert zurückgegeben.
+ * @example
+ * quitGame();
+ */
 function quitGame() {
   if (animationId) cancelAnimationFrame(animationId);
   if (canvas && mouseMoveHandler)
@@ -133,7 +225,17 @@ function resetGame() {
 }
 
 // Spieler mit Maus
+/**
+ * Bewegt den Spieler-Schläger entsprechend der Mausposition.
+ * @param {MouseEvent} e - Das Maus-Event mit Positionsdaten.
+ * @returns {void} Es wird kein Wert zurückgegeben.
+ * @example
+ * canvas.addEventListener('mousemove', movePlayer);
+ */
 function movePlayer(e) {
+  if (!canvas || !player) return;
+  if (!e || typeof e.clientY !== "number") return;
+
   const rect = canvas.getBoundingClientRect();
   let mouseY = e.clientY - rect.top;
   player.y = Math.max(
@@ -175,7 +277,16 @@ function moveAI() {
 }
 
 // Ballverhalten
+/**
+ * Aktualisiert die Ballposition, prüft Kollisionen und Tore.
+ * Erhöht die Punktzahl und setzt das Spiel ggf. zurück oder beendet es.
+ * @returns {void} Es wird kein Wert zurückgegeben.
+ * @example
+ * updateBall();
+ */
 function updateBall() {
+  if (!canvas || !player || !ai || !ball) return;
+
   ball.x += ball.vx;
   ball.y += ball.vy;
 
@@ -221,6 +332,14 @@ function updateBall() {
 }
 
 // Spielende
+/**
+ * Beendet das Spiel und zeigt das Endergebnis an.
+ * Entfernt Event-Listener und stoppt die Animation.
+ * @param {boolean} playerWon - true, wenn der Spieler gewonnen hat, sonst false.
+ * @returns {void} Es wird kein Wert zurückgegeben.
+ * @example
+ * endGame(true); // Spieler gewinnt
+ */
 function endGame(playerWon) {
   if (state !== GameState.PLAYING) return;
 
@@ -231,7 +350,11 @@ function endGame(playerWon) {
   window.removeEventListener("keyup", keyUpHandler);
 
   state = GameState.GAMEOVER;
-
+  const playerName = escapeHTML(
+    window.pingpongPlayerName && window.pingpongPlayerName.length > 0
+      ? window.pingpongPlayerName
+      : "Spieler",
+  );
   main.innerHTML = `
     <div class="pingpong-wrapper">
       <div class="pingpong-card">
@@ -239,8 +362,8 @@ function endGame(playerWon) {
           <span class="pingpong-title">Ping-Pong</span>
         </div>
         <div class="pingpong-card-content">
-          <h2>${playerWon ? "Du hast gewonnen!" : "Der Computer gewinnt!"}</h2>
-          <p>Endstand: <b>${playerScore}</b> : <b>${aiScore}</b></p>
+          <h2>${playerWon ? `Glückwunsch, ${playerName}! Du hast gewonnen!` : "Der Computer gewinnt!"}</h2>
+          <p>Endstand: <b>${playerName}</b> <b>${playerScore}</b> : <b>${aiScore}</b> <b>Computer</b></p>
           <button class="pingpong-btn" id="restartBtn">Nochmal spielen</button>
         </div>
       </div>
@@ -257,6 +380,8 @@ function updateScoreboard() {
 
 // Zeichnen
 function draw() {
+  if (!ctx || !canvas || !player || !ai || !ball) return;
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.strokeStyle = "#00bfff";
@@ -289,6 +414,5 @@ function gameLoop() {
     animationId = requestAnimationFrame(gameLoop);
   }
 }
-
 // Initialstart
 renderStartScreen();

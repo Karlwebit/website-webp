@@ -6,6 +6,10 @@ body {
 
 main h1 {
   color: #007acc;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 /* Galerie-Grid Layout */

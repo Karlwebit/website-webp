@@ -6,4 +6,8 @@ body {
 
 main h1 {
   color: #4b2bc8;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
 }
