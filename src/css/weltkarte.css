@@ -2,20 +2,13 @@
 /* Leaflet CSS importiert von CDN, damit die Karte korrekt angezeigt wird */
 
 body {
-  background-color: #d8cab5;
+  background-color: #cad2ee;
 }
 
 main h1 {
-<<<<<<< HEAD
   color: #4b2bc8;
   font-family: "Comic Sans MS", cursive, sans-serif;
   margin-top: 0;
   margin-bottom: 24px;
   text-align: center;
-=======
-  color: #c85d2b;
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  display: flex;
-  justify-content: center;
->>>>>>> b72afb9ecb33356ed7020a201fa7a7bb30ab59f2
 }

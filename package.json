@@ -5,11 +5,7 @@
   "scripts": {
     "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
     "start": "npm run build && npm run dev",
-=======
-    "start": "concurrently \"http-server -p 5501\" \"cmd /c start http://localhost:5501\"",
->>>>>>> b72afb9ecb33356ed7020a201fa7a7bb30ab59f2
     "build": "vite build",
     "lint": "eslint src/js --config eslint.config.mjs",
     "format": "prettier --write \"src/**/*.{js,css,html}\""
